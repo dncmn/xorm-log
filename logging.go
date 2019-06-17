@@ -35,7 +35,10 @@ func GetXormLogger() *XormLogger {
 }
 
 // DiscardLogger don't log implementation for core.ILogger
-type DiscardLogger struct{}
+type DiscardLogger struct {
+	level   core.LogLevel
+	showSQL bool
+}
 
 type XormLogger struct{}
 
@@ -91,30 +94,30 @@ func (DiscardLogger) Warnf(format string, v ...interface{}) {
 }
 
 // Level empty implementation
-func (DiscardLogger) Level() core.LogLevel {
-	return core.LOG_UNKNOWN
-}
+//func (DiscardLogger) Level() core.LogLevel {
+//	return core.LOG_UNKNOWN
+//}
 
 // SetLevel empty implementation
-func (DiscardLogger) SetLevel(l core.LogLevel) {}
-
-// ShowSQL empty implementation
-func (DiscardLogger) ShowSQL(show ...bool) {}
-
-// IsShowSQL empty implementation
-func (DiscardLogger) IsShowSQL() bool {
-	return false
-}
+//func (DiscardLogger) SetLevel(l core.LogLevel) {}
+//
+//// ShowSQL empty implementation
+//func (DiscardLogger) ShowSQL(show ...bool) {}
+//
+//// IsShowSQL empty implementation
+//func (DiscardLogger) IsShowSQL() bool {
+//	return false
+//}
 
 // SimpleLogger is the default implment of core.ILogger
-type SimpleLogger struct {
-	DEBUG   *log.Logger
-	ERR     *log.Logger
-	INFO    *log.Logger
-	WARN    *log.Logger
-	level   core.LogLevel
-	showSQL bool
-}
+//type SimpleLogger struct {
+//	DEBUG   *log.Logger
+//	ERR     *log.Logger
+//	INFO    *log.Logger
+//	WARN    *log.Logger
+//	level   core.LogLevel
+//	showSQL bool
+//}
 
 func Init(config FileLogConfig) {
 	os.MkdirAll(config.Path, 0777)
@@ -127,18 +130,18 @@ func Init(config FileLogConfig) {
 }
 
 // Level implement core.ILogger
-func (s *SimpleLogger) Level() core.LogLevel {
+func (s *DiscardLogger) Level() core.LogLevel {
 	return s.level
 }
 
 // SetLevel implement core.ILogger
-func (s *SimpleLogger) SetLevel(l core.LogLevel) {
+func (s *DiscardLogger) SetLevel(l core.LogLevel) {
 	s.level = l
 	return
 }
 
 // ShowSQL implement core.ILogger
-func (s *SimpleLogger) ShowSQL(show ...bool) {
+func (s *DiscardLogger) ShowSQL(show ...bool) {
 	if len(show) == 0 {
 		s.showSQL = true
 		return
@@ -147,6 +150,6 @@ func (s *SimpleLogger) ShowSQL(show ...bool) {
 }
 
 // IsShowSQL implement core.ILogger
-func (s *SimpleLogger) IsShowSQL() bool {
+func (s *DiscardLogger) IsShowSQL() bool {
 	return s.showSQL
 }
