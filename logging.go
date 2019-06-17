@@ -48,76 +48,50 @@ func GetLogger() *DiscardLogger {
 	return sllog
 }
 
-// Debug logs a message with debug log level
-func (DiscardLogger) Debug(v ...interface{}) {
-	logger.Debug(v...)
-}
-
 // GetLogrusLogger get logrus logger
 func GetLogrusLogger() *logrus.Logger {
 	return logger
 }
 
+// Debug logs a message with debug log level
+func (d *DiscardLogger) Debug(v ...interface{}) {
+	logger.Debug(v...)
+}
+
 // DDebugWithF logs a message with Debug log level
-func (DiscardLogger) Debugf(format string, v ...interface{}) {
+func (d *DiscardLogger) Debugf(format string, v ...interface{}) {
 	logger.Debugf(format, v...)
 }
 
 // Error empty implementation
-func (DiscardLogger) Error(v ...interface{}) {
+func (d *DiscardLogger) Error(v ...interface{}) {
 	logger.Error(v...)
 }
 
 // Errorf empty implementation
-func (DiscardLogger) Errorf(format string, v ...interface{}) {
+func (d *DiscardLogger) Errorf(format string, v ...interface{}) {
 	logger.Errorf(format, v...)
 }
 
 // Info empty implementation
-func (DiscardLogger) Info(v ...interface{}) {
+func (d *DiscardLogger) Info(v ...interface{}) {
 	logger.Info(v...)
 }
 
 // Infof empty implementation
-func (DiscardLogger) Infof(format string, v ...interface{}) {
+func (d *DiscardLogger) Infof(format string, v ...interface{}) {
 	logger.Infof(format, v...)
 }
 
 // Warn empty implementation
-func (DiscardLogger) Warn(v ...interface{}) {
+func (d *DiscardLogger) Warn(v ...interface{}) {
 	logger.Warn(v...)
 }
 
 // Warnf empty implementation
-func (DiscardLogger) Warnf(format string, v ...interface{}) {
+func (d *DiscardLogger) Warnf(format string, v ...interface{}) {
 	logger.Warnf(format, v...)
 }
-
-// Level empty implementation
-//func (DiscardLogger) Level() core.LogLevel {
-//	return core.LOG_UNKNOWN
-//}
-
-// SetLevel empty implementation
-//func (DiscardLogger) SetLevel(l core.LogLevel) {}
-//
-//// ShowSQL empty implementation
-//func (DiscardLogger) ShowSQL(show ...bool) {}
-//
-//// IsShowSQL empty implementation
-//func (DiscardLogger) IsShowSQL() bool {
-//	return false
-//}
-
-// SimpleLogger is the default implment of core.ILogger
-//type SimpleLogger struct {
-//	DEBUG   *log.Logger
-//	ERR     *log.Logger
-//	INFO    *log.Logger
-//	WARN    *log.Logger
-//	level   core.LogLevel
-//	showSQL bool
-//}
 
 func Init(config FileLogConfig) {
 	os.MkdirAll(config.Path, 0777)
