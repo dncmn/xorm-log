@@ -12,6 +12,18 @@ var (
 	sllog  = &DiscardLogger{}
 )
 
+type LogLevel int
+
+const (
+	// !nashtsai! following level also match syslog.Priority value
+	LOG_DEBUG LogLevel = iota
+	LOG_INFO
+	LOG_WARNING
+	LOG_ERR
+	LOG_OFF
+	LOG_UNKNOWN
+)
+
 // default log options
 const (
 	DEFAULT_LOG_PREFIX = "[xorm]"
@@ -24,7 +36,7 @@ const (
 // DiscardLogger don't log implementation for core.ILogger
 type DiscardLogger struct {
 	entry   *logrus.Entry
-	level   core.LogLevel
+	level   LogLevel
 	showSQL bool
 }
 
@@ -41,7 +53,7 @@ func GetLogrusLogger() *logrus.Logger {
 
 // Error implement core.ILogger
 func (s *DiscardLogger) Error(v ...interface{}) {
-	if s.level <= core.LOG_ERR {
+	if s.level <= LOG_ERR {
 		s.entry.Error(v...)
 	}
 	return
@@ -49,7 +61,7 @@ func (s *DiscardLogger) Error(v ...interface{}) {
 
 // Errorf implement core.ILogger
 func (s *DiscardLogger) Errorf(format string, v ...interface{}) {
-	if s.level <= core.LOG_ERR {
+	if s.level <= LOG_ERR {
 		s.entry.Errorf(format, v...)
 	}
 	return
@@ -57,7 +69,7 @@ func (s *DiscardLogger) Errorf(format string, v ...interface{}) {
 
 // Debug implement core.ILogger
 func (s *DiscardLogger) Debug(v ...interface{}) {
-	if s.level <= core.LOG_DEBUG {
+	if s.level <= LOG_DEBUG {
 		s.entry.Debug(v...)
 	}
 	return
@@ -65,7 +77,7 @@ func (s *DiscardLogger) Debug(v ...interface{}) {
 
 // Debugf implement core.ILogger
 func (s *DiscardLogger) Debugf(format string, v ...interface{}) {
-	if s.level <= core.LOG_DEBUG {
+	if s.level <= LOG_DEBUG {
 		s.entry.Debugf(format, v...)
 	}
 	return
@@ -73,7 +85,7 @@ func (s *DiscardLogger) Debugf(format string, v ...interface{}) {
 
 // Info implement core.ILogger
 func (s *DiscardLogger) Info(v ...interface{}) {
-	if s.level <= core.LOG_INFO {
+	if s.level <= LOG_INFO {
 		s.entry.Info(v...)
 	}
 	return
@@ -81,7 +93,7 @@ func (s *DiscardLogger) Info(v ...interface{}) {
 
 // Infof implement core.ILogger
 func (s *DiscardLogger) Infof(format string, v ...interface{}) {
-	if s.level <= core.LOG_INFO {
+	if s.level <= LOG_INFO {
 		s.entry.Infof(format, v...)
 	}
 	return
@@ -89,7 +101,7 @@ func (s *DiscardLogger) Infof(format string, v ...interface{}) {
 
 // Warn implement core.ILogger
 func (s *DiscardLogger) Warn(v ...interface{}) {
-	if s.level <= core.LOG_WARNING {
+	if s.level <= LOG_WARNING {
 		s.entry.Warn(v...)
 	}
 	return
@@ -97,7 +109,7 @@ func (s *DiscardLogger) Warn(v ...interface{}) {
 
 // Warnf implement core.ILogger
 func (s *DiscardLogger) Warnf(format string, v ...interface{}) {
-	if s.level <= core.LOG_WARNING {
+	if s.level <= LOG_WARNING {
 		s.entry.Warnf(format, v...)
 	}
 	return
@@ -114,12 +126,12 @@ func Init(config FileLogConfig) {
 }
 
 // Level implement core.ILogger
-func (s *DiscardLogger) Level() core.LogLevel {
+func (s *DiscardLogger) Level() LogLevel {
 	return s.level
 }
 
 // SetLevel implement core.ILogger
-func (s *DiscardLogger) SetLevel(l core.LogLevel) {
+func (s *DiscardLogger) SetLevel(l LogLevel) {
 	s.level = l
 	return
 }
