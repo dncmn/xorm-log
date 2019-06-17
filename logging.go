@@ -40,7 +40,7 @@ type DiscardLogger struct {
 	showSQL bool
 }
 
-var _ core.ILogger = &DiscardLogger{}
+//var _ core.ILogger = &DiscardLogger{}
 
 func GetLogger() *DiscardLogger {
 	return sllog
