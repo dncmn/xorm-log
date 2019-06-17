@@ -1,0 +1,31 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "r+ATmIuQ0ocNp7T8SZsb2fx6AFA=",
+			"path": "github.com/go-xorm/core",
+			"revision": "a31f53637037b3461649b8a9a03e13b26d31f12d",
+			"revisionTime": "2019-06-17T05:27:01Z"
+		},
+		{
+			"checksumSHA1": "Aulh7C5SVOA4Jzt5eHNH6197Mbk=",
+			"path": "github.com/konsorten/go-windows-terminal-sequences",
+			"revision": "f55edac94c9bbba5d6182a4be46d86a2c9b5b50e",
+			"revisionTime": "2019-02-26T22:47:05Z"
+		},
+		{
+			"checksumSHA1": "SVO+Zm6SNwWrpgyc6mcTXbH4aJ8=",
+			"path": "github.com/sirupsen/logrus",
+			"revision": "2a22dbedbad1fd454910cd1f44f210ef90c28464",
+			"revisionTime": "2019-05-18T13:52:02Z"
+		},
+		{
+			"checksumSHA1": "T12uSKTjWMagbOOWAPO7JnfqQss=",
+			"path": "golang.org/x/sys/unix",
+			"revision": "15dcb6c0061f497a3f66e3ea034b629c6dd4d99e",
+			"revisionTime": "2019-06-15T12:11:14Z"
+		}
+	],
+	"rootPath": "code.dncmn.io/xorg-log"
+}
