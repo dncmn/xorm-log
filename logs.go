@@ -1,7 +1,7 @@
 package xorm_log
 
 import (
-	"./log"
+	"code.dncmn.io/xorm-log/log"
 	"fmt"
 	"github.com/go-xorm/core"
 )
